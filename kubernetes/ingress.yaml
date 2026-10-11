@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: progree-task4-ingress
+  namespace: progree-task4
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: progree.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: progree-task4-service
+                port:
+                  number: 80

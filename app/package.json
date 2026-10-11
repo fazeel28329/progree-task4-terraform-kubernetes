@@ -1,0 +1,12 @@
+{
+  "name": "progree-task4-app",
+  "version": "1.0.0",
+  "description": "Kubernetes and Terraform DevOps Mini Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

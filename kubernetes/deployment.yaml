@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: progree-task4-app
+  namespace: progree-task4
+  labels:
+    app: progree-task4
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: progree-task4
+  template:
+    metadata:
+      labels:
+        app: progree-task4
+    spec:
+      containers:
+        - name: nodejs-app
+          image: progree-task4-app:v2
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
