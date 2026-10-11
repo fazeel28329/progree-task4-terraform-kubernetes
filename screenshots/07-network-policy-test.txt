@@ -1,0 +1,22 @@
+Progree Task 4 - Network Isolation Verification
+
+Test 1: NetworkPolicy Applied
+Command:
+kubectl exec -n progree-task4 network-test -- wget -qO- -T 5 http://progree-task4-service/health
+
+Result:
+wget: download timed out
+command terminated with exit code 1
+
+Test 2: NetworkPolicy Removed
+Result:
+{"status":"healthy"}
+
+Test 3: NetworkPolicy Restored
+Result:
+progree-task4-network-policy created
+progree-task4-app 2/2 Ready
+
+Conclusion:
+NetworkPolicy successfully blocked unauthorized test Pod traffic.
+Connectivity was restored after removing the policy.

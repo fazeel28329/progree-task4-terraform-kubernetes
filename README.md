@@ -132,3 +132,44 @@ production-grade highly available cluster.
 Muhammad Fazeel Akram
 
 DevOps Internship Project - Progree
+
+## Final Kubernetes Verification
+
+The following features were implemented and tested successfully:
+
+### Infrastructure
+- Terraform Kubernetes provider configured for Minikube.
+- Namespace created and managed using Terraform.
+- Kubernetes Deployment running two Node.js application replicas.
+
+### Application Networking
+- ClusterIP Service configured.
+- NGINX Ingress configured with the hostname `progree.local`.
+- NetworkPolicy applied to restrict incoming application traffic to the `ingress-nginx` namespace on TCP port 3000.
+- Unauthorized test Pod traffic timed out while the NetworkPolicy was active.
+- Connectivity was restored when the NetworkPolicy was removed.
+- NetworkPolicy was reapplied after testing.
+
+### Autoscaling and Availability
+- Horizontal Pod Autoscaler configured with a 50% CPU utilization target.
+- Minimum replicas: 2.
+- Maximum replicas: 4.
+- Kubernetes HPA events confirmed scaling to 4 replicas and returning to 2.
+- Pod self-healing tested successfully.
+- Pod Disruption Budget configured with `minAvailable: 1`.
+- Preferred Pod anti-affinity configured.
+
+### Persistent Storage
+- PersistentVolumeClaim provisioned with 1Gi capacity.
+- PVC status verified as Bound.
+- Persistent data successfully written and read.
+
+### Limitations
+- This demonstration uses a single-node Minikube cluster.
+- Pod recovery was verified, but multi-node high availability was not demonstrated.
+- Terraform manages the Kubernetes namespace; application resources are managed using Kubernetes manifests.
+- NetworkPolicy enforcement was verified for the tested unauthorized Pod connection.
+
+## Verification Evidence
+
+Screenshots and network isolation test results are available in the `screenshots/` directory.
